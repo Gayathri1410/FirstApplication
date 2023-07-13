@@ -1,0 +1,70 @@
+
+plugins {
+    id 'com.android.application'
+}
+android {
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.firstapplication"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_STL=c++_shared'
+            }
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        main {
+            jni {
+                srcDirs 'src\\main\\jni', 'app\\jni', 'src\\main\\jni\\hello'
+                jniLibs.srcDirs = ['src/main/jniLibs']
+
+            }
+        }
+    }
+    packagingOptions {
+       exclude 'META-INF/**'
+    }
+    }
+
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.5'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.microsoft.appcenter:appcenter-analytics:4.4.5'
+    implementation 'com.microsoft.appcenter:appcenter-crashes:4.4.5'
+        implementation 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.1'
+        implementation 'org.glassfish.jaxb:jaxb-runtime:3.0.1'
+        implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
+        implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.3'
+
+}
